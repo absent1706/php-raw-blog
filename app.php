@@ -3,6 +3,9 @@
 /* APP INIT AREA. BEGIN */
     define('BASE_DIR', __DIR__);
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
     // TODO NEXT VERSIONS: use Composer and write
     //   require __DIR__.'/vendor/autoload.php';
     require __DIR__.'/autoload.php';
@@ -20,13 +23,10 @@
         // TODO: move methods to classes and write like
         //       => ['class' => '\App\HomeController',  'method' => 'home'],
 
-        '/'          => 'home',
+        '/'          => 'posts_index',
 
         '/posts/new' => 'posts_new',
-        '/posts'     => 'posts_index',
         // TODO NEXT VERSIONS: handle ULRs with params like '/posts/<id>/edit'
-
-        '/users'     => 'users_index',
     ];
 
     // TODO:
@@ -59,40 +59,16 @@
 /* CONTROLLERS AREA. BEGIN */
     // TODO NEXT VERSIONS: this area should be moved to separate place
 
-    // TODO NEXT COMMIT: take HTML from HTML files
-    function home() {
-        return '
-            <html>
-            <head>
-                <link rel="stylesheet" type="text/css" href="/css/main.css">
-            </head>
-            <body>
-                home page
-            </body>
-            </html>';
-    }
-
     function posts_index() {
-        return '
-            <html>
-            <head>
-                <link rel="stylesheet" type="text/css" href="/css/main.css">
-            </head>
-            <body>
-                posts page
-            </body>
-            </html>';
+        $posts = [
+            ['id' => 1, 'title' => 'Post 1', 'body' => 'Post 1 body'],
+            ['id' => 2, 'title' => 'Post 2', 'body' => 'Post 2 body'],
+            ['id' => 3, 'title' => 'Post 3', 'body' => 'Post 3 body'],
+        ];
+        return view('posts/index', compact('posts'));
     }
 
     function posts_new() {
-        return '
-            <html>
-            <head>
-                <link rel="stylesheet" type="text/css" href="/css/main.css">
-            </head>
-            <body>
-                form to add a new post
-            </body>
-            </html>';
+        return view('posts/new');
     }
 /* CONTROLLERS AREA. END */
