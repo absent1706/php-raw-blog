@@ -3,8 +3,7 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-    <h1>All posts</h1>
-    <hr>
+    <h1 class="page-header">All posts</h1>
 
     <?php foreach ($posts as $post): ?>
         <h2><a href="/posts/<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a></h2>

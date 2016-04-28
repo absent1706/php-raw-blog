@@ -1,8 +1,2 @@
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
-<body>
-    Form for creating new post
-</body>
-</html>
+<h1 class="page-header">New post</h1>
+<!-- Some form here -->
