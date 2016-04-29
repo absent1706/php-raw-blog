@@ -14,6 +14,7 @@ function view($view_path, $variables = array()) {
     return $html;
 }
 
+// TODO: incapsulate $db somewhere to make it invisible in global scope
 $db = null;
 function db() {
     global $db;
