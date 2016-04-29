@@ -13,3 +13,12 @@ function view($view_path, $variables = array()) {
 
     return $html;
 }
+
+$db = null;
+function db() {
+    global $db;
+    if (!$db) {
+        $db = new PDO('sqlite:'.BASE_DIR.'/db.sqlite');
+    }
+    return $db;
+}

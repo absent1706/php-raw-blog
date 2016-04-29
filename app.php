@@ -3,24 +3,13 @@
 namespace App;
 
 function run() {
-
-    define('BASE_DIR', __DIR__);
-
     // TODO NEXT VERSIONS: use Slim for routing
-
-    // TODO: - incapsulate this stuff to a class
-    //       - not echo output but return it to index.php;
 
     // TODO: URL aliases and url_for method
     $routes = [
         // TODO NEXT VERSIONS: use url aliases so not hardcode URLs in templates but write like <a href = "url_for('posts:new')>"
         // TODO NEXT VERSIONS: use Slim for routing
-
-        // TODO: move methods to classes and write like
-        //       => ['class' => '\App\HomeController',  'method' => 'home'],
-
         '/'          => 'posts_index',
-
         '/posts/new' => 'posts_new',
         // TODO NEXT VERSIONS: handle ULRs with params like '/posts/<id>/edit'
     ];
@@ -39,11 +28,19 @@ function run() {
 
     foreach($routes as $url_template => $controller) {
         if ($url_template == $_SERVER["REQUEST_URI"]) {
-            $method = 'Controllers\\'.$controller;
-            $response = $method();
-            if (!is_array($response)) {
-                $response = ['code' => 200, 'body' => $response];
+            try {
+                $method = 'Controllers\\'.$controller;
+                $response = $method();
+                if (!is_array($response)) {
+                    $response = ['code' => 200, 'body' => $response];
+                }
             }
+            catch (\Exception $e) {
+                // TODO: log 500 errors
+                $body = (ENV == 'dev') ? "<pre>".$e->getMessage()."\n".$e->getTraceAsString()."</pre>" : 'Sorry, some error occured';
+                $response = ['code' => 500, 'body' => $body];
+            }
+
             return $response;
         }
     }
