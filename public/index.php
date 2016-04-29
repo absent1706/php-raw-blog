@@ -1,5 +1,11 @@
 <?php
 
-// TODO: log requests and HTTP response codes.
-//   Something like error_log($_SERVER["REQUEST_URI"]);
-require __DIR__.'/../app.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require __DIR__.'/../autoload.php';
+
+$response = App\run();
+
+http_response_code($response['code']);
+echo $response['body'];
